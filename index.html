@@ -1,130 +1,175 @@
 <!DOCTYPE html>
-<html lang="id" xmlns:th="http://www.thymeleaf.org">
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0f2a4a">
-    <meta name="description" content="Clamfy Wellness — hidup sehat yang ringan seperti awan.">
-    <title>Clamfy Wellness — Smart Healthy Living</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&amp;family=Playfair+Display:ital,wght@0,600;1,500&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Clamfy Wellness — Smart Healthy Living</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&amp;family=Playfair+Display:ital,wght@0,600;1,500&amp;display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0f2a4a;--mut:#5d7391;--bg:#f4faff;--card:#fff;--line:#dcebf9;--sky:#d3eaff;--inp:#fff;--blue:#4aa8ff;--aqua:#5ee6e0;--mint:#7ef0b6;--sun:#ffd36b;--coral:#ff8fa3;--vio:#a78bfa;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--ink:#e8f1ff;--mut:#9db4d0;--bg:#0b1b30;--card:#14294a;--line:#25416d;--sky:#17365f;--inp:#0f2340}}
+:root[data-theme="dark"]{--ink:#e8f1ff;--mut:#9db4d0;--bg:#0b1b30;--card:#14294a;--line:#25416d;--sky:#17365f;--inp:#0f2340}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{font-family:'DM Sans',system-ui,sans-serif;color:var(--ink);background:linear-gradient(180deg,var(--sky),var(--bg) 600px) no-repeat var(--bg);min-height:100vh;line-height:1.65;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--sky);z-index:60}
+h1,h2{font-family:'Playfair Display',Georgia,serif;font-weight:600;line-height:1.15;letter-spacing:-1px}
+em{font-style:italic;background:linear-gradient(90deg,var(--blue),var(--aqua),var(--vio));-webkit-background-clip:text;background-clip:text;color:transparent}
+button,input,select{font:inherit;color:inherit}
+a{color:var(--blue);font-weight:700;text-decoration:none;cursor:pointer}
+.sky{position:absolute;inset:0 0 auto;height:700px;overflow:hidden;z-index:-1;pointer-events:none}
+.cl{position:absolute;display:block;background:#fff;border-radius:99px;opacity:.85;animation:dr linear infinite}
+.cl::before,.cl::after{content:"";position:absolute;background:#fff;border-radius:50%}
+.cl::before{width:55%;height:160%;left:12%;top:-80%}.cl::after{width:40%;height:130%;right:12%;top:-55%}
+.c1{width:180px;height:48px;top:120px;animation-duration:60s}
+.c2{width:120px;height:34px;top:290px;animation-duration:85s;animation-delay:-30s;opacity:.6}
+.c3{width:230px;height:56px;top:500px;animation-duration:110s;animation-delay:-60s;opacity:.5}
+@keyframes dr{from{left:-300px}to{left:110%}}
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 5%;background:color-mix(in srgb,var(--card) 70%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.brand{font-family:'Playfair Display',serif;font-size:24px;font-weight:600;color:var(--ink)}.brand span{color:var(--blue)}
+#nav{display:flex;align-items:center;gap:12px;font-size:14px}
+.pill,.btn{border:0;cursor:pointer;color:#fff;font-weight:700;border-radius:30px;background:linear-gradient(120deg,#0f2a4a,#1f4f86 55%,#4aa8ff);background-size:200% 100%;transition:.35s}
+.pill{padding:9px 20px}.btn{padding:14px 28px;box-shadow:0 12px 26px rgba(15,42,74,.25)}
+.pill:hover,.btn:hover{background-position:100% 0;transform:translateY(-2px)}
+.pill:focus-visible,.btn:focus-visible,a:focus-visible{outline:3px solid var(--aqua);outline-offset:2px}
+.lnk{background:none;border:0;cursor:pointer;color:var(--mut)}
+main{max-width:1100px;margin:auto;padding:30px 5% 60px}
+.hero{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px;align-items:center;padding:40px 0 60px}
+.hero h1{font-size:clamp(42px,7vw,72px);margin-bottom:18px}
+.lead{color:var(--mut);max-width:460px;margin-bottom:26px}
+.vis{position:relative;display:grid;place-items:center;min-height:340px}
+.orb{position:relative;width:min(290px,78vw);aspect-ratio:1;border-radius:50%;display:grid;place-items:center;text-align:center;background:color-mix(in srgb,var(--card) 60%,transparent);border:1px solid var(--line);box-shadow:0 20px 50px rgba(74,168,255,.25);animation:fl 6s ease-in-out infinite}
+.orb svg{position:absolute;inset:14px;transform:rotate(-90deg)}
+.orb .r{stroke-dasharray:327;stroke-dashoffset:327;animation:rg 1.8s .3s forwards}
+@keyframes rg{to{stroke-dashoffset:59}}
+@keyframes fl{50%{transform:translateY(-14px)}}
+.orb b{font-family:'Playfair Display',serif;font-size:60px;line-height:1;display:block}.orb small{color:var(--mut)}
+.chip{position:absolute;padding:8px 16px;border-radius:30px;background:var(--card);border:1px solid var(--line);font-size:13px;box-shadow:0 10px 24px rgba(74,168,255,.2);animation:fl 5s ease-in-out infinite}
+.g4{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:24px;box-shadow:0 10px 30px rgba(15,42,74,.06)}
+.ico{width:54px;height:54px;border-radius:16px;display:grid;place-items:center;font-size:25px;margin-bottom:10px;flex:none}
+.i1{background:linear-gradient(135deg,#bfe9ff,#4aa8ff)}.i2{background:linear-gradient(135deg,#d3ffe8,#7ef0b6)}.i3{background:linear-gradient(135deg,#e2d9ff,#a78bfa)}.i4{background:linear-gradient(135deg,#ffe9b8,#ff8fa3)}
+.auth{max-width:420px;margin:30px auto;display:grid;gap:12px}
+label{display:grid;gap:5px;font-size:12px;font-weight:700;color:var(--mut)}
+input,select{padding:12px 14px;border:1px solid var(--line);border-radius:14px;background:var(--inp);outline:0;width:100%}
+input:focus,select:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(74,168,255,.18)}
+.msg{padding:10px 14px;border-radius:12px;font-size:13px;font-weight:700;margin-bottom:14px}.ok{background:#d9fbea;color:#17794a}.er{background:#ffe3e8;color:#b3263e}
+.ban{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;padding:26px 30px;border-radius:26px;color:#fff;margin-bottom:18px;background:linear-gradient(120deg,#0f2a4a,#1f4f86 55%,#4aa8ff)}
+.ban h1{font-size:clamp(24px,4vw,38px)}.ban p{color:#bfe0ff;font-size:14px}
+.ban .sk{text-align:center;padding:10px 20px;border-radius:18px;background:rgba(255,255,255,.15)}.ban .sk b{font-family:'Playfair Display',serif;font-size:30px;display:block;line-height:1.1}
+.st{display:flex;flex-wrap:wrap;align-items:center;gap:12px}.st .ico{margin:0}.st>div:nth-child(2){flex:1}
+.st b{font-family:'Playfair Display',serif;font-size:32px;display:block;line-height:1}.st small{color:var(--mut);font-size:12px}
+.mt{flex-basis:100%;height:8px;border-radius:8px;background:var(--line);overflow:hidden}
+.mt i{display:block;height:100%;border-radius:8px;width:0;transition:width 1.2s}.in .mt i{width:var(--w)}
+.sp{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin:18px 0}
+.fm{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;align-content:start}.fm h3,.fm .btn{grid-column:1/-1}
+.un{display:flex}.un input{border-radius:14px 0 0 14px}.un span{display:grid;place-items:center;padding:0 14px;border-radius:0 14px 14px 0;background:linear-gradient(120deg,var(--blue),var(--aqua));color:#fff;font-size:13px;font-weight:700}
+h3{font-size:16px;margin-bottom:12px;display:flex;justify-content:space-between;gap:8px;align-items:baseline}h3 small{font-weight:400;color:var(--mut);font-size:12px}
+.bars{display:flex;align-items:flex-end;justify-content:space-around;height:150px;gap:6px}
+.bc{flex:1;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px;font-size:11px}
+.bf{width:100%;max-width:34px;height:0;border-radius:10px 10px 4px 4px;transition:height 1.1s cubic-bezier(.3,.8,.3,1)}.in .bf{height:var(--h)}
+.dn{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.do{width:140px;height:140px;border-radius:50%;display:grid;place-items:center;position:relative;flex:none}
+.do::after{content:"";position:absolute;inset:24px;background:var(--card);border-radius:50%}
+.do b{position:relative;z-index:1;text-align:center;font-size:22px;line-height:1.1}.do small{display:block;font-size:11px;font-weight:400}
+.lg{list-style:none;font-size:13px;display:grid;gap:6px}.lg i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px}
+.ls{list-style:none;display:grid;gap:8px}.ls li{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:14px;border:1px solid var(--line);font-size:14px}.ls li>span{flex:1}.ls small{color:var(--mut)}
+.x{border:0;background:#ffe3e8;color:#b3263e;border-radius:9px;min-width:32px;height:32px;cursor:pointer;font-weight:700;padding:0 10px}
+.tw{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:14px}th{text-align:left;font-size:12px;color:var(--mut);padding:8px}td{padding:10px 8px;border-top:1px solid var(--line)}
+footer{text-align:center;color:var(--mut);font-size:12px;padding:20px 5%}
+.rv{opacity:0;transform:translateY(30px);transition:opacity .8s,transform .8s}.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}.bf{height:var(--h)}.mt i{width:var(--w)}.orb .r{stroke-dashoffset:59}}
+</style>
 </head>
 <body>
-<div class="sky" aria-hidden="true">
-    <span class="cloud c1"></span><span class="cloud c2"></span><span class="cloud c3"></span>
-</div>
+<div class="sky" aria-hidden="true"><i class="cl c1"></i><i class="cl c2"></i><i class="cl c3"></i></div>
+<header class="nav"><a class="brand" href="#" data-a="home">☁ clamfy<span>.</span></a><div id="nav"></div></header>
+<main id="app"></main>
+<footer>© 2026 Clamfy Wellness. Pencatat kebiasaan sehat, bukan pengganti saran dokter.</footer>
+<script>
+const $=s=>document.querySelector(s),K='clamfy:v1';
+const H=s=>{let h=5381;for(const c of s)h=((h*33)^c.charCodeAt(0))>>>0;return h.toString(36)};
+const E=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const IK={AKTIVITAS:'🏃',AIR:'💧',NUTRISI:'🥗',TIDUR:'🌙'},TG={AKTIVITAS:30,AIR:8,NUTRISI:2000,TIDUR:8};
+const IC={AKTIVITAS:'i4',AIR:'i1',NUTRISI:'i2',TIDUR:'i3'},LB={AKTIVITAS:'menit aktivitas',AIR:'gelas air',NUTRISI:'kkal',TIDUR:'jam tidur'};
+const GR={AKTIVITAS:['#ffd36b','#ff8fa3'],AIR:['#4aa8ff','#5ee6e0'],NUTRISI:['#7ef0b6','#4aa8ff'],TIDUR:['#a78bfa','#4aa8ff']};
+const PAL=['#4aa8ff','#7ef0b6','#ffd36b','#ff8fa3','#a78bfa','#5ee6e0'],HR=['Min','Sen','Sel','Rab','Kam','Jum','Sab'];
+const DEF=()=>({u:[{id:1,n:'Administrator',e:'admin@clamfy.com',p:H('admin123'),r:'ADMIN'}],l:[],k:[['Jalan Kaki','AKTIVITAS','Menit'],['Olahraga / Workout','AKTIVITAS','Menit'],['Membaca Buku','AKTIVITAS','Menit'],['Meditasi','AKTIVITAS','Menit'],['Minum Air','AIR','Gelas'],['Nutrisi / Makan','NUTRISI','Kkal'],['Tidur','TIDUR','Jam']],me:0,id:10});
+let S;try{S=JSON.parse(localStorage.getItem(K))}catch(e){}S=S||DEF();
+let v='home',mode='login',msg=null;
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(S))}catch(e){}};
+const iso=d=>new Date(d-d.getTimezoneOffset()*6e4).toISOString().slice(0,10);
+const fm=n=>Math.round(n*10)/10;
+const note=()=>{const m=msg;msg=null;return m?`<p class="msg ${m[0]}">${E(m[1])}</p>`:''};
 
-<header class="nav">
-    <a class="brand" href="#home">☁ clamfy<span>.</span></a>
-    <nav>
-        <a href="#fitur">Fitur</a>
-        <a href="#grafik">Dashboard</a>
-        <a href="#habit">Kebiasaan</a>
-        <a th:href="@{/login}">Masuk</a>
-        <a class="pill" th:href="@{/register}">Daftar Gratis</a>
-    </nav>
-</header>
+const homeV=()=>`<section class="hero"><div><h1>Hidup sehat,<br><em>seringan awan.</em></h1><p class="lead">Catat air, tidur, nutrisi, dan aktivitas harianmu dalam satu tempat yang tenang dan menyenangkan.</p><button class="btn" data-a="reg">Mulai catat</button></div>
+<div class="vis"><div class="orb"><svg viewBox="0 0 120 120"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5ee6e0"/><stop offset="1" stop-color="#4aa8ff"/></linearGradient></defs><circle cx="60" cy="60" r="52" fill="none" stroke="var(--line)" stroke-width="9"/><circle class="r" cx="60" cy="60" r="52" fill="none" stroke="url(#g)" stroke-width="9" stroke-linecap="round"/></svg><div><b>82</b><small>Skor wellness</small></div></div>
+<span class="chip" style="top:10px;left:0">💧 6/8 gelas</span><span class="chip" style="bottom:50px;right:0;animation-delay:-2s">😴 7,5 jam tidur</span><span class="chip" style="bottom:0;left:20px;animation-delay:-3s">👟 8.420 langkah</span></div></section>
+<div class="g4">${[['i1','💧','Pantau air','Catat setiap gelas yang kamu minum.'],['i2','🥗','Nutrisi seimbang','Pantau kalori dan kebiasaan makanmu.'],['i3','🌙','Kualitas tidur','Lihat pola tidurmu selama seminggu.'],['i4','🏃','Aktivitas','Rayakan setiap langkah kecilmu.']].map(([c,i,t,d])=>`<article class="card rv"><div class="ico ${c}">${i}</div><h3>${t}</h3><p style="color:var(--mut);font-size:14px">${d}</p></article>`).join('')}</div>`;
 
-<main>
-    <section class="hero" id="home">
-        <div class="hero-text">
-            <p class="eyebrow">SMART HEALTHY LIVING</p>
-            <h1>Hidup sehat,<br><em>seringan awan.</em></h1>
-            <p class="lead">Catat air, tidur, nutrisi, dan aktivitas harianmu dalam satu tempat yang tenang dan menyenangkan.</p>
-            <div class="actions">
-                <a class="btn" th:href="@{/register}">Mulai Catat ↗</a>
-                <a class="link" href="#fitur">Kenali fitur</a>
-            </div>
-        </div>
+const authV=()=>`<form class="card auth" data-f="auth">${note()}<h2>${mode==='login'?'Selamat datang <em>kembali</em>':'Mulai hidup <em>lebih sehat</em>'}</h2>${mode==='reg'?'<label>Nama<input name="n" required></label>':''}<label>Email<input type="email" name="e" required></label><label>Password${mode==='reg'?' (minimal 6 karakter)':''}<input type="password" name="p" minlength="${mode==='reg'?6:1}" required></label><button class="btn">${mode==='login'?'Masuk':'Buat akun'}</button><p style="font-size:13px;color:var(--mut)">${mode==='login'?'Belum punya akun? <a href="#" data-a="reg">Daftar</a><br>Coba admin: admin@clamfy.com / admin123':'Sudah punya akun? <a href="#" data-a="login">Masuk</a>'}</p></form>`;
 
-        <div class="hero-visual">
-            <div class="glass score">
-                <svg viewBox="0 0 120 120" class="ring big">
-                    <defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
-                        <stop offset="0" stop-color="#5ee6e0"/><stop offset="1" stop-color="#4aa8ff"/>
-                    </linearGradient></defs>
-                    <circle cx="60" cy="60" r="52" class="track"/>
-                    <circle cx="60" cy="60" r="52" class="bar" id="heroRing" stroke="url(#g1)"/>
-                </svg>
-                <div class="score-num"><b id="heroNum">0</b><small>Skor Wellness</small></div>
-            </div>
-            <div class="glass chip chip1">💧 <b>6/8</b> gelas</div>
-            <div class="glass chip chip2">😴 <b>7,5</b> jam tidur</div>
-            <div class="glass chip chip3">👟 <b>8.420</b> langkah</div>
-        </div>
-    </section>
+function dashV(me){
+ const L=S.l.filter(x=>x.u===me.id),keys=[...Array(7)].map((_,i)=>{const d=new Date();d.setDate(d.getDate()-6+i);return d}).map(d=>[iso(d),HR[d.getDay()]]),ks=keys.map(k=>k[0]);
+ const ser=k=>ks.map(t=>L.filter(x=>x.k===k&&x.t===t).reduce((a,x)=>a+x.v,0)),cats=Object.keys(IK);
+ const act={};L.filter(x=>x.k==='AKTIVITAS'&&ks.includes(x.t)).forEach(x=>act[x.d]=(act[x.d]||0)+x.v);
+ const ae=Object.entries(act),tot=ae.reduce((a,[,n])=>a+n,0);let ac=0;
+ const don=tot?`conic-gradient(${ae.map(([,n],i)=>{const s=`${PAL[i%6]} ${ac}% ${ac+n/tot*100}%`;ac+=n/tot*100;return s}).join(',')})`:'var(--line)';
+ const rec=[...L].sort((a,b)=>b.t.localeCompare(a.t)||b.id-a.id).slice(0,10),hari=new Set(L.filter(x=>ks.includes(x.t)).map(x=>x.t)).size;
+ return `<section class="ban"><div><h1>Halo, ${E(me.n)}!</h1><p>Setiap catatan kecil adalah langkah menuju hidup yang lebih sehat.</p></div><div class="sk"><b>${hari}/7</b><small>hari tercatat minggu ini</small></div></section>${note()}
+<div class="g4">${cats.map(k=>{const t=ser(k)[6];return `<div class="card st rv"><div class="ico ${IC[k]}">${IK[k]}</div><div><b>${fm(t)}</b><small>${LB[k]} · target ${TG[k]}</small></div><div class="mt"><i style="--w:${Math.min(100,Math.round(t/TG[k]*100))}%;background:linear-gradient(90deg,${GR[k][0]},${GR[k][1]})"></i></div></div>`}).join('')}</div>
+<div class="sp"><form class="card fm rv" data-f="catat"><h3>＋ Catat sekarang</h3><label>Jenis kegiatan<select name="d" id="sel">${S.k.map(k=>`<option value="${E(k[0])}" data-u="${E(k[2])}">${IK[k[1]]} ${E(k[0])}</option>`).join('')}</select></label><label>Nilai atau durasi<div class="un"><input type="number" name="v" step="0.1" min="0.1" placeholder="0" required><span id="un">${E(S.k[0]?S.k[0][2]:'')}</span></div></label><label>Tanggal<input type="date" name="t" value="${iso(new Date())}" max="${iso(new Date())}"></label><label>Keterangan (opsional)<input name="n" maxlength="100" placeholder="mis. jalan pagi di taman"></label><button class="btn">Simpan catatan</button></form>
+<div class="card rv"><h3>Komposisi aktivitas <small>menit, 7 hari</small></h3><div class="dn"><div class="do" style="background:${don}"><b>${Math.round(tot)}<small>menit</small></b></div><ul class="lg">${ae.length?ae.map(([n,m],i)=>`<li><i style="background:${PAL[i%6]}"></i>${E(n)}: ${Math.round(m)} mnt</li>`).join(''):'<li>Belum ada aktivitas minggu ini.</li>'}</ul></div></div></div>
+<div class="sp">${cats.map(k=>{const a=ser(k),mx=Math.max(...a,1);return `<div class="card rv"><h3>${IK[k]} ${k[0]+k.slice(1).toLowerCase()} <small>7 hari terakhir</small></h3><div class="bars">${a.map((n,i)=>`<div class="bc"><span>${n?fm(n):''}</span><div class="bf" style="--h:${n?Math.max(n/mx*100,8):2}%;background:linear-gradient(180deg,${GR[k][0]},${GR[k][1]});transition-delay:${i*80}ms"></div><span>${keys[i][1]}</span></div>`).join('')}</div></div>`}).join('')}</div>
+<section class="card rv"><h3>Catatan terbaru</h3><ul class="ls">${rec.length?rec.map(x=>`<li><b style="font-size:22px">${IK[x.k]}</b><span><b>${E(x.d)}</b>: ${fm(x.v)} ${E(x.s)}<br><small>${x.t}${x.n?' — '+E(x.n):''}</small></span><button class="x" data-a="del" data-id="${x.id}" aria-label="Hapus catatan">✕</button></li>`).join(''):'<li>Belum ada catatan. Isi form di atas untuk mulai.</li>'}</ul></section>`}
 
-    <section class="features" id="fitur">
-        <div class="intro reveal">
-            <p class="eyebrow">FITUR UTAMA</p>
-            <h2>Sehat itu perjalanan, <em>bukan perlombaan.</em></h2>
-        </div>
-        <div class="grid4">
-            <article class="card reveal"><div class="ico i1">💧</div><h3>Pantau Air</h3><p>Ketuk gelas untuk mencatat minummu hari ini.</p></article>
-            <article class="card reveal"><div class="ico i2">🥗</div><h3>Nutrisi Seimbang</h3><p>Lihat komposisi karbo, protein, lemak, dan serat.</p></article>
-            <article class="card reveal"><div class="ico i3">🌙</div><h3>Kualitas Tidur</h3><p>Grafik tidur mingguan agar istirahatmu terjaga.</p></article>
-            <article class="card reveal"><div class="ico i4">🏃</div><h3>Aktivitas</h3><p>Rayakan setiap langkah kecil yang kamu ambil.</p></article>
-        </div>
-    </section>
+function adminV(){
+ const nu=S.u.filter(u=>u.r!=='ADMIN').length;
+ return `<section class="ban"><div><h1>Panel admin</h1><p>Kelola pengguna dan jenis kegiatan. Data tersimpan di browser ini.</p></div></section>${note()}
+<div class="g4">${[['i1','👥',nu,'pengguna terdaftar'],['i2','📝',S.l.length,'total catatan'],['i4','🏷️',S.k.length,'jenis kegiatan']].map(([c,i,n,t])=>`<div class="card st"><div class="ico ${c}">${i}</div><div><b>${n}</b><small>${t}</small></div></div>`).join('')}</div>
+<form class="card fm" data-f="au" style="margin:18px 0"><h3>＋ Tambah pengguna</h3><label>Nama<input name="n" required></label><label>Email<input type="email" name="e" required></label><label>Password<input type="password" name="p" minlength="6" required></label><label>Peran<select name="r"><option value="USER">Pengguna</option><option value="ADMIN">Admin</option></select></label><button class="btn">Tambah pengguna</button></form>
+<section class="card" style="margin-bottom:18px"><h3>Kelola pengguna</h3><div class="tw"><table><tr><th>Nama</th><th>Email</th><th>Peran</th><th>Catatan</th><th></th></tr>${S.u.map(u=>`<tr><td>${E(u.n)}</td><td>${E(u.e)}</td><td>${u.r}</td><td>${S.l.filter(x=>x.u===u.id).length}</td><td>${u.r==='ADMIN'?'':`<button class="x" data-a="delu" data-id="${u.id}">Hapus</button>`}</td></tr>`).join('')}</table></div></section>
+<form class="card fm" data-f="ak" style="margin-bottom:18px"><h3>＋ Tambah jenis kegiatan</h3><label>Nama kegiatan<input name="n" placeholder="mis. Yoga" required></label><label>Masuk ke grafik<select name="k"><option value="AKTIVITAS">🏃 Aktivitas</option><option value="AIR">💧 Air</option><option value="NUTRISI">🥗 Nutrisi</option><option value="TIDUR">🌙 Tidur</option></select></label><label>Satuan<input name="s" placeholder="Menit / Gelas / Kkal / Jam" required></label><button class="btn">Tambah kegiatan</button></form>
+<section class="card"><h3>Daftar jenis kegiatan <small>tampil di dropdown pengguna</small></h3><ul class="ls">${S.k.map((k,i)=>`<li><b style="font-size:22px">${IK[k[1]]}</b><span>${E(k[0])} <small>${k[1]} · ${E(k[2])}</small></span><button class="x" data-a="delk" data-i="${i}">Hapus</button></li>`).join('')}</ul></section>`}
 
-    <section class="dash" id="grafik">
-        <div class="intro light reveal">
-            <p class="eyebrow">CONTOH DASHBOARD</p>
-            <h2>Semua kebiasaan, <em>dalam satu pandangan.</em></h2>
-        </div>
-        <div class="dash-grid">
-            <div class="glass dark reveal wide">
-                <h3>Aktivitas Mingguan <small>% target</small></h3>
-                <div class="bars" id="bars"></div>
-            </div>
-            <div class="glass dark reveal">
-                <h3>Nutrisi Hari Ini</h3>
-                <div class="donut-wrap">
-                    <div class="donut" id="donut"><span>1.850<small>kkal</small></span></div>
-                    <ul class="legend" id="legend"></ul>
-                </div>
-            </div>
-            <div class="glass dark reveal">
-                <h3>Tidur Mingguan <small>jam</small></h3>
-                <svg viewBox="0 0 300 130" class="sleep" id="sleep"></svg>
-            </div>
-            <div class="glass dark reveal">
-                <h3>Minum Air <small id="waterTxt">0 / 8 gelas</small></h3>
-                <div class="glasses" id="glasses"></div>
-            </div>
-        </div>
-    </section>
+function render(){
+ const me=S.u.find(u=>u.id===S.me);
+ $('#nav').innerHTML=me?`<span>Halo, <b>${E(me.n)}</b></span><button class="pill" data-a="out">Keluar</button>`:`<button class="lnk" data-a="login">Masuk</button><button class="pill" data-a="reg">Daftar gratis</button>`;
+ $('#app').innerHTML=me?(me.r==='ADMIN'?adminV():dashV(me)):v==='auth'?authV():homeV();
+ setTimeout(()=>document.querySelectorAll('.rv').forEach((x,i)=>setTimeout(()=>x.classList.add('in'),i*70)),30)}
 
-    <section class="habit" id="habit">
-        <div class="habit-box reveal">
-            <div>
-                <p class="eyebrow">KEBIASAAN HARIAN</p>
-                <h2>Centang yang sudah <em>kamu lakukan.</em></h2>
-                <ul class="checks" id="checks"></ul>
-            </div>
-            <div class="ring-wrap">
-                <svg viewBox="0 0 120 120" class="ring">
-                    <defs><linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
-                        <stop offset="0" stop-color="#ff8fa3"/><stop offset="1" stop-color="#ffd36b"/>
-                    </linearGradient></defs>
-                    <circle cx="60" cy="60" r="52" class="track dim"/>
-                    <circle cx="60" cy="60" r="52" class="bar" id="habitRing" stroke="url(#g2)"/>
-                </svg>
-                <div class="score-num"><b id="habitNum">0%</b><small>selesai</small></div>
-            </div>
-        </div>
-    </section>
+document.addEventListener('click',e=>{const t=e.target.closest('[data-a]');if(!t)return;e.preventDefault();
+ const a=t.dataset.a,me=S.u.find(u=>u.id===S.me),adm=me&&me.r==='ADMIN';
+ if(a==='home'){v='home';scrollTo(0,0)}
+ else if(a==='login'||a==='reg'){mode=a;v='auth';scrollTo(0,0)}
+ else if(a==='out'){S.me=0;v='home';save();scrollTo(0,0)}
+ else if(a==='del'){S.l=S.l.filter(x=>!(String(x.id)===t.dataset.id&&x.u===S.me));msg=['ok','Catatan dihapus.'];save()}
+ else if(adm&&a==='delu'){const id=+t.dataset.id,u=S.u.find(x=>x.id===id);if(u&&u.r!=='ADMIN'&&confirm('Hapus pengguna beserta semua catatannya?')){S.u=S.u.filter(x=>x.id!==id);S.l=S.l.filter(x=>x.u!==id);msg=['ok','Pengguna dihapus.'];save()}}
+ else if(adm&&a==='delk'){S.k.splice(+t.dataset.i,1);save()}
+ render()});
 
-    <section class="closing" id="tentang">
-        <p class="eyebrow">PENGINGAT KECIL</p>
-        <h2>Mulai kecil. <em>Tumbuh setiap hari.</em></h2>
-        <a class="btn light" href="#home">Kembali ke atas ↑</a>
-    </section>
-</main>
+document.addEventListener('change',e=>{if(e.target.id==='sel')$('#un').textContent=e.target.selectedOptions[0].dataset.u});
 
-<footer><span>☁ clamfy.</span><p>© 2026 Clamfy Wellness — A softer way to live well.</p></footer>
-
-<script th:src="@{/js/app.js}"></script>
+document.addEventListener('submit',e=>{e.preventDefault();
+ const f=e.target,d=Object.fromEntries(new FormData(f)),me=S.u.find(u=>u.id===S.me),adm=me&&me.r==='ADMIN',w=f.dataset.f,em=(d.e||'').trim().toLowerCase();
+ if(w==='auth'){
+  if(mode==='login'){const u=S.u.find(x=>x.e===em&&x.p===H(d.p));if(u){S.me=u.id;save()}else msg=['er','Email atau password salah.']}
+  else if(!d.n.trim()||d.p.length<6)msg=['er','Nama wajib diisi dan password minimal 6 karakter.'];
+  else if(S.u.some(x=>x.e===em))msg=['er','Email sudah terdaftar, silakan masuk.'];
+  else{S.u.push({id:S.id++,n:d.n.trim(),e:em,p:H(d.p),r:'USER'});save();mode='login';msg=['ok','Akun berhasil dibuat, silakan masuk.']}}
+ else if(w==='catat'&&me){const k=S.k.find(x=>x[0]===d.d),n=parseFloat(d.v),td=iso(new Date());
+  if(!k||!(n>0)||n>100000)msg=['er','Data tidak valid, cek lagi isianmu.'];
+  else{S.l.push({id:S.id++,u:me.id,k:k[1],d:k[0],v:n,s:k[2],t:(d.t&&d.t<=td)?d.t:td,n:(d.n||'').trim().slice(0,100)});save();msg=['ok',`✓ ${k[0]} ${fm(n)} ${k[2]} berhasil dicatat!`]}}
+ else if(w==='au'&&adm){
+  if(!d.n.trim()||d.p.length<6)msg=['er','Nama wajib diisi dan password minimal 6 karakter.'];
+  else if(S.u.some(x=>x.e===em))msg=['er','Email sudah terdaftar.'];
+  else{S.u.push({id:S.id++,n:d.n.trim(),e:em,p:H(d.p),r:d.r==='ADMIN'?'ADMIN':'USER'});save();msg=['ok','✓ Pengguna ditambahkan.']}}
+ else if(w==='ak'&&adm){const n=d.n.trim(),s=d.s.trim();
+  if(!n||!s||!IK[d.k])msg=['er','Nama, kategori, dan satuan wajib diisi.'];
+  else if(S.k.some(x=>x[0]===n))msg=['er','Kegiatan itu sudah ada.'];
+  else{S.k.push([n,d.k,s]);save();msg=['ok','✓ Kegiatan ditambahkan dan langsung muncul di form pengguna.']}}
+ render()});
+render();
+</script>
 </body>
 </html>
